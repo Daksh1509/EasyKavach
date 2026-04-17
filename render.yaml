@@ -1,0 +1,35 @@
+services:
+  # Backend: FastAPI Web Service
+  - type: web
+    name: easykavach-api
+    runtime: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:////var/data/easykavach.db
+      - key: PYTHON_VERSION
+        value: 3.14.2
+      - key: DEBUG
+        value: false
+    disk:
+      name: easykavach-db-disk
+      mountPath: /var/data
+      sizeGB: 1
+
+  # Frontend: Static Site
+  - type: static
+    name: easykavach-ui
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          name: easykavach-api
+          type: web
+          property: host
+    routes:
+      - type: rewrite
+        src: /*
+        dest: /index.html

@@ -1,0 +1,1 @@
+"""EasyKavach backend package."""

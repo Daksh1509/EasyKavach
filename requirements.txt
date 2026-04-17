@@ -1,0 +1,22 @@
+# Root-level pinned requirements (matches backend/.venv)
+# Deployment uses: cd backend && pip install -r requirements.txt
+# This file is kept for reference / local venv setup at repo root.
+# See backend/requirements.txt for the unpinned deployment spec.
+
+fastapi==0.136.0
+uvicorn[standard]==0.44.0
+sqlalchemy==2.0.49
+pydantic==2.12.5
+pydantic-settings==2.13.1
+httpx==0.28.1
+apscheduler==3.11.2
+python-dotenv==1.2.2
+scikit-learn==1.8.0
+numpy==2.4.4
+pandas==3.0.2
+joblib==1.5.3
+python-jose[cryptography]==3.5.0
+passlib[bcrypt]==1.7.4
+alembic==1.18.4
+pytest==9.0.3
+pytest-asyncio==1.3.0
